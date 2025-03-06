@@ -3,7 +3,6 @@ package config
 import (
 	"bytes"
 	"encoding/json"
-	"log"
 	"os"
 )
 
@@ -52,21 +51,22 @@ func getConfigFilePath() (string, error) {
 }
 
 
-func Read() Config {
+func Read() (Config, error) {
 	filePath, err := getConfigFilePath()
 	if err != nil {
-		log.Fatalf("Failed to find home directory: %v\n", err)
+		return Config{}, err
 	}
 
 	fileText, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatalf("Failed to read file: %v\n", err)
+		return Config{}, err
 	}
 	
 	var c Config
 	json.NewDecoder(bytes.NewBuffer(fileText)).Decode(&c)
-	return c	
+	return c, nil	
 }
+
 
 
 
