@@ -39,6 +39,11 @@ func main() {
 	}
 	validCommands.register("login", HandlerLogin)
 	validCommands.register("register", HandlerRegister)
+	validCommands.register("reset", HandlerReset)
+	validCommands.register("users", HandlerUsers)
+	validCommands.register("agg", HandlerAgg)
+	validCommands.register("addfeed", HandlerAddFeed)
+	validCommands.register("feeds", HandlerFeeds)
 	args := os.Args
 	if len(args) < 2 {
 		log.Fatal("no command supplied")
