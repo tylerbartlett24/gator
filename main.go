@@ -37,6 +37,7 @@ func main() {
 	validCommands := commands{
 		commandList: make(map[string]func (*state, command) error),
 	}
+	
 	validCommands.register("login", HandlerLogin)
 	validCommands.register("register", HandlerRegister)
 	validCommands.register("reset", HandlerReset)
@@ -44,6 +45,9 @@ func main() {
 	validCommands.register("agg", HandlerAgg)
 	validCommands.register("addfeed", HandlerAddFeed)
 	validCommands.register("feeds", HandlerFeeds)
+	validCommands.register("follow", HandlerFollow)
+	validCommands.register("following", HandlerFollowing)
+
 	args := os.Args
 	if len(args) < 2 {
 		log.Fatal("no command supplied")
