@@ -43,10 +43,11 @@ func main() {
 	validCommands.register("reset", HandlerReset)
 	validCommands.register("users", HandlerUsers)
 	validCommands.register("agg", HandlerAgg)
-	validCommands.register("addfeed", HandlerAddFeed)
+	validCommands.register("addfeed", middlewareLoggedIn(HandlerAddFeed))
 	validCommands.register("feeds", HandlerFeeds)
-	validCommands.register("follow", HandlerFollow)
-	validCommands.register("following", HandlerFollowing)
+	validCommands.register("follow", middlewareLoggedIn(HandlerFollow))
+	validCommands.register("following", middlewareLoggedIn(HandlerFollowing))
+	validCommands.register("unfollow", middlewareLoggedIn(HandlerUnfollow))
 
 	args := os.Args
 	if len(args) < 2 {
