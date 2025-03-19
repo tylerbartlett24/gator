@@ -80,13 +80,18 @@ func HandlerUsers(s *state, cmd command) error {
 }
 
 func HandlerAgg(s *state, cmd command) error {
-	feed, err := fetchFeed(context.Background(), "https://www.wagslane.dev/index.xml")
-	if err != nil {
-		return fmt.Errorf("could not fetch feed: %w", err)
+	if len(cmd.Arguments) != 1 {
+		return errors.New("usage: agg <time between requests>")
 	}
 
-	fmt.Println(feed)
-	return err
+	duration, err := time.ParseDuration(cmd.Arguments[0])
+	if err != nil {
+		return err
+	}
+	ticker := time.NewTicker(duration)
+	for ; ; <-ticker.C {
+		scrapeFeeds(s)
+	}
 }
 
 func HandlerAddFeed(s *state, cmd command, user database.User) error {
