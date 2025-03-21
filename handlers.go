@@ -152,7 +152,8 @@ func HandlerFeeds(s *state, cmd command) error {
 		return err
 	}
 	for _, feed := range feeds {
-		fmt.Println(feed)
+		fmt.Printf("Name: %v, URL: %v, Creator: %v\n", feed.Name, feed.Url, 
+		feed.Name_2.String)
 	}
 	return err
 }
